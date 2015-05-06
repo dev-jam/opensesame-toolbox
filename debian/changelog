@@ -1,0 +1,5 @@
+opensesame-toolbox (1.0.0-1) UNRELEASED; urgency=medium
+
+  * Initial release. (Closes: #XXXXXX)
+
+ -- Bob Rosbag <debian@bobrosbag.nl>  Mon, 23 Mar 2015 23:10:17 +0100

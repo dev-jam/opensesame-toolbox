@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+    <mime-type type="application/x-opensesame-experiment-manager">
+		<comment>OpenSesame experiment</comment>
+		<icon>applications-science</icon>
+        <glob pattern="*.opensesameexperimentmanager"/>
+    </mime-type>
+</mime-info>

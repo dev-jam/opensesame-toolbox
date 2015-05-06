@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=OpenSesame Questionnaire Processor
+GenericName=Questionnaire Processor
+Comment=Process scores from OpenSesame Questionnaires
+TryExec=opensesame-questionnaire-processor
+Exec=opensesame-questionnaire-processor
+Icon=opensesame
+Type=Application
+Categories=Development;IDE;Science
+StartupNotify=false

@@ -1,0 +1,47 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+This file is part of OpenSesame Toolbox
+
+OpenSesame Toolbox is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+OpenSesame Experiment Manager is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+Refer to <http://www.gnu.org/licenses/> for a copy of the GNU General Public License.
+
+@author Bob Rosbag
+"""
+
+import sys
+
+from PyQt4 import QtGui
+
+from libopensesametoolbox.experimentmanager_ui import ExperimentManagerUI
+
+
+def main():
+    if len(sys.argv) == 1:
+        app = QtGui.QApplication(sys.argv)
+        win = ExperimentManagerUI()
+        win.show()
+        sys.exit(app.exec_())
+    elif len(sys.argv) > 1:
+        filePath = sys.argv[1]
+        app = QtGui.QApplication(sys.argv)
+        win = ExperimentManagerUI()
+        win.show()
+        win.startRestoreSettings(filePath)
+        sys.exit(app.exec_())
+    else:
+        pass
+
+if __name__ == "__main__":
+    main()
+else:
+    pass

@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>Help</title>
+<style>
+body{
+	font-family: "Helvetica","Arial";
+	margin: 25px;
+}
+
+h1, h2{
+	color: #046;
+}
+
+h2{
+	line-height: 50px;
+	border-bottom: 1px solid #07A;
+}
+
+
+</style>
+</head>
+<body>
+<h1>OpenSesame Toolbox<br/><sub style='font-size:40%; font-weight:normal'>Copyright Bob Rosbag (2015)</sub></h1>
+
+OpenSesame Toolbox offers two applications to supplement OpenSesame. OpenSesame Experiment Manager can manage, order and execute OpenSesame Experiments and create OpenSesame questionnaires. OpenSesame Questionnaire Processor can process OpenSesame multiple choice questionnaires by giving a summary of the scores.
+
+<h2>Usage GUI</h2>
+This application package contains two applications:<br/>
+
+
+<h4>OpenSesame Experiment Manager:</h4>
+- Use the preselected Experiment folder or select your own custom folder.<br/>
+- Select a log folder.<br/>
+- Select language.<br/>
+- You can drag and drop items to rearrange the order and (de)select the items.<br/>
+- Additionally you can create new MC or Open Questionnaires.<br/>
+- Use the Load and Save option to load/save your selection of questionnaires.<br/>
+
+
+
+<h4>OpenSesame Questionnaire Processor:</h4>
+- Select the folder containing the input files in the "Input folder" field. Only files with an extension of .csv will be processed.<br/>
+- Select the destination folder.<br/>
+- Press the 'Process' button and the processing process will commence.<br/>
+- Additionally, custom adjustments can be made with the extra options.<br/>
+
+
+<h2>Usage CLI</h2>
+
+It is possible to use OpenSesame Questionnaire Processor from the CLI:
+
+<p><code>python opensesame-questionnaire-processor &lt;source_folder&gt; [&lt;target_folder&gt;]</code></p>
+
+To use the CLI method it is required the questionnaires originate from the OpenSesame Experiment Manager or contain the same column names in the log files
+<br/>
+
+
+<h2>Licensing</h2>
+
+<p>OpenSesame Toolbox has been released under the terms of the GNU General Public License 3. You can find the full text of this license at <a href='http://www.gnu.org/licenses/gpl.txt'>http://www.gnu.org/licenses/gpl.txt</a></p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p>See <a href='http://www.gnu.org/licenses/'>http://www.gnu.org/licenses/</a> for a copy of the GNU General Public License</p>
+
+</body>
+</html>

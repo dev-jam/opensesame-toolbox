@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=OpenSesame Experiment Manager
+GenericName=Experiment Manager
+Comment=Manage OpenSesame experiments and create OpenSesame questionnaires
+TryExec=opensesame-experiment-manager
+Exec=opensesame-experiment-manager
+Icon=opensesame
+Type=Application
+Categories=Development;IDE;Science
+StartupNotify=false
+MimeType=application/x-opensesame-experiment-manager

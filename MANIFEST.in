@@ -1,0 +1,7 @@
+include data/opensesame-experiment-manager.desktop
+include data/opensesame-questionnaire-processor.desktop
+include data/x-opensesame-experiment-manager.xml
+include data/opensesame.svg
+recursive-include resources
+recursive-exclude *.pyc
+recursive-include ~*

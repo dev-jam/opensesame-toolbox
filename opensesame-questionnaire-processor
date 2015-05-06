@@ -1,0 +1,75 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+This file is part of OpenSesame Toolbox
+
+OpenSesame Toolbox is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+OpenSesame Experiment Manager is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+Refer to <http://www.gnu.org/licenses/> for a copy of the GNU General Public License.
+
+@author Bob Rosbag
+"""
+
+
+import sys
+import os
+
+from PyQt4 import QtGui
+
+from libopensesametoolbox.questionnaireprocessor import QuestionnaireProcessor
+
+def main():
+    if len(sys.argv) == 1:
+        from libopensesametoolbox.questionnaireprocessor_ui import QuestionnaireProcessorUI
+        app = QtGui.QApplication(sys.argv)
+        win = QuestionnaireProcessorUI()
+        win.show()
+        sys.exit(app.exec_())
+
+    elif len(sys.argv) == 2:
+             errorMessage = "Not enough arguments, without GUI at minimum the input folder and output folder have to be given."
+             print(errorMessage, file=sys.stderr)
+    elif len(sys.argv) == 3:
+        if not os.path.isdir(sys.argv[1]):
+            errorMessage = "Error: The specified input folder is invalid"
+            print(errorMessage, file=sys.stderr)
+        elif not os.path.isdir(sys.argv[2]):
+            errorMessage = "Error: The specified output folder is invalid"
+            print(errorMessage, file=sys.stderr)
+        else:
+            from libexperimentmanager.io_tools import getResourceLoc
+            from configobj import ConfigObj
+            config = ConfigObj(getResourceLoc('opensesame-toolbox.conf'))
+            conf_default_input = config['default_input']
+
+
+            idKey        = conf_default_input['idKey']
+            responseKey  = conf_default_input['responseKey']
+            categoryKey  = conf_default_input['categoryKey']
+            answerKey    = conf_default_input['answerKey']
+            scoreKey     = conf_default_input['scoreKey']
+            idList       = None
+            categoryList = None
+            answerString = None
+            scoreList    = None
+            custom       = False
+
+            QuestionnaireProcessor(sys.argv[1], sys.argv[2], responseKey, idKey, categoryKey, answerKey, scoreKey,
+                                   idList, categoryList, answerString, scoreList, custom, ui=None)
+
+    else:
+        errorMessage = "Too many arguments given. This command only accepts start of the gui or a cmd with an input folder and an output folder."
+        print(errorMessage, file=sys.stderr)
+
+if __name__ == "__main__":
+    main()
+else:
+    pass
