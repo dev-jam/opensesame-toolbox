@@ -21,6 +21,7 @@ import glob
 import os
 import sys
 import csv
+import logging
 
 from configobj import ConfigObj
 import numpy as np
@@ -58,8 +59,6 @@ def QuestionnaireProcessor(dataFolder, destinationFolder, responseKey, idKey, ca
         nrDataFile    = len(listDataFiles(dataFolder, dataExtList))
         totalFiles += nrDataFile
 
-
-
     counter = 0
 
     for newDataFolder in dataFolderList:
@@ -80,7 +79,9 @@ def QuestionnaireProcessor(dataFolder, destinationFolder, responseKey, idKey, ca
             fileName = os.path.basename(dataFile)
             sys.stdout.write(fileName)
 
-            dataDict = readCsv(dataFile)
+            dataDict = readCsv(dataFile, ui)
+            if dataDict == None:
+                return
 
             fileNameList.append(fileName)
 
@@ -150,8 +151,6 @@ def QuestionnaireProcessor(dataFolder, destinationFolder, responseKey, idKey, ca
                         ui.showErrorMessage(errorMessage)
                     return
 
-
-
             ## clean up items
             responseList   = removeJunk(responseList)
             responseIdList = removeJunk(responseIdList)
@@ -163,7 +162,6 @@ def QuestionnaireProcessor(dataFolder, destinationFolder, responseKey, idKey, ca
 
             else:
                 pass
-
 
             responseDict = {}
             answerScoreDict = {}
@@ -317,7 +315,7 @@ def listDataFiles(dataDir,extensionList):
 
     return fileList
 
-def readCsv(pathToCsv):
+def readCsv(pathToCsv, ui):
     """
     Reads csv file to a dict containing lists, each representing a column.
     The keys of the dictionary represent the column names, and the value contains
@@ -331,23 +329,27 @@ def readCsv(pathToCsv):
     """
 
     encoding = 'utf-8'
-    delimiter = ','
-    quotechar = '"'
+#    delimiter = ','
+#    quotechar = '"'
 
 
     with open(pathToCsv, 'rt', newline='', encoding=encoding) as fp:
 
         try:
             dialect = csv.Sniffer().sniff(fp.readline())
-        except:
+        except Exception:
             dialect = csv.get_dialect('excel')
         fp.seek(0)
 
 
         try:
             data = csv.reader(fp, dialect=dialect)
-        except:
-            data = csv.reader(fp, delimiter=delimiter, quotechar=quotechar)
+        except Exception as e:
+            errorMessage = ("Cannot process csv file, unknown format, see the log file for more information")
+            if ui is not None:
+                logging.exception("Cannot process csv file: %s", e)
+                ui.showErrorMessage(errorMessage)
+            return None
 
         rowDataList = list(data)
     headerList = rowDataList[0]
@@ -355,12 +357,21 @@ def readCsv(pathToCsv):
 
 
     dataDict = {}
-    for index in range(len(headerList)):
 
-        headerString = headerList[index]
-        dataTuple = dataTupleList[index]
+    try:
+        for index in range(len(headerList)):
 
-        dataDict[headerString] = list(dataTuple)
+            headerString = headerList[index]
+            dataTuple = dataTupleList[index]
+
+            dataDict[headerString] = list(dataTuple)
+
+    except Exception as e:
+            errorMessage = ("Cannot process csv file, unknown format")
+            if ui is not None:
+                logging.exception("Cannot process csv file: %s", e)
+                ui.showErrorMessage(errorMessage)
+            return None
 
     return dataDict
 

@@ -4,9 +4,13 @@ Copyright Bob Rosbag (2015)
 
 ABOUT
 -----
-Current version: 1.7.0
+Current version: 1.9.1
 
-OpenSesame Toolbox offers two applications to supplement OpenSesame. OpenSesame Experiment Manager can manage, order and execute OpenSesame Experiments and create OpenSesame questionnaires. OpenSesame Questionnaire Processor can process OpenSesame multiple choice questionnaires by giving a summary of the scores.
+OpenSesame Toolbox offers two applications to supplement OpenSesame.  
+  
+OpenSesame Experiment Manager can manage, order and execute OpenSesame Experiments and create OpenSesame questionnaires.
+
+OpenSesame Questionnaire Processor can process OpenSesame multiple choice questionnaires by giving a summary of the scores.
 
 
 DOCUMENTATION AND INSTALLATION INSTRUCTIONS
@@ -31,6 +35,6 @@ To use the CLI method it is required the questionnaires originate from the OpenS
 DEPENDENCIES
 ------------
 - Python 3.4 <https://www.python.org>
-- PyQt4 (QtGui, QtCore, uic) <http://www.riverbankcomputing.com/software/pyqt/download>
+- PyQt5 (QtGui, QtCore, uic) <http://www.riverbankcomputing.com/software/pyqt/download>
 - NumPy <http://http://www.numpy.org>
 - ConfigObj <http://www.voidspace.org.uk/python/configobj.html>

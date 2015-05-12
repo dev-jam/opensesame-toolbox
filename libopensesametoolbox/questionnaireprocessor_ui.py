@@ -19,20 +19,23 @@ Refer to <http://www.gnu.org/licenses/> for a copy of the GNU General Public Lic
 
 import sys
 import os
+import logging
 
-from PyQt4 import QtCore, QtGui, uic
-from PyQt4.QtWebKit import QWebView
+from PyQt5 import QtCore, QtWidgets, QtGui, uic
+from PyQt5.QtWebKitWidgets import QWebView
 from configobj import ConfigObj
 
+from libopensesametoolbox.logger import configureLogging
 from libopensesametoolbox.questionnaireprocessor import QuestionnaireProcessor
 from libopensesametoolbox.io_tools import OutLog, getResourceLoc
 from libopensesametoolbox.clean_data import cleanUpString, cleanUpStringList, removeJunk, stringToBool
 
-version = "1.7.0"
+version = "1.9.1"
 author = "Bob Rosbag"
 email = "debian@bobrosbag.nl"
 
 config = ConfigObj(getResourceLoc('opensesame-toolbox.conf'))
+
 conf_questionnaireprocessor_ui = config['questionnaireprocessor_ui']
 
 verbose     = stringToBool(conf_questionnaireprocessor_ui['verbose'])
@@ -49,7 +52,7 @@ Copyright 2015
 """.format(version,author,email)
 
 
-class QuestionnaireProcessorUI(QtGui.QMainWindow):
+class QuestionnaireProcessorUI(QtWidgets.QMainWindow):
     """
     QT User interface
     """
@@ -61,6 +64,8 @@ class QuestionnaireProcessorUI(QtGui.QMainWindow):
         super(QuestionnaireProcessorUI, self).__init__()
 
         self._initConf()
+        self._initHomeApp()
+        self._initLogging()
         self._initDefaultValues()
         self._initUI()
 
@@ -69,17 +74,46 @@ class QuestionnaireProcessorUI(QtGui.QMainWindow):
         Initialize config file
         """
 
+        self.conf_default_io                = config['default_io']
         self.conf_questionnaireprocessor_ui = config['questionnaireprocessor_ui']
         self.conf_ui                        = config['ui']
         self.conf_default_input             = config['default_input']
         self.conf_format                    = config['format']
 
+    def _initHomeApp(self):
+        """
+        Initializes paths of the application
+        """
+
+        self.homeFolder = os.path.expanduser("~")
+
+        homeAppFolderName         = self.conf_default_io['homeAppFolderName']
+        homeAppLogFolder          = self.conf_default_io['homeAppLogFolder']
+
+        self.homeAppFolder        = os.path.join(self.homeFolder, homeAppFolderName)
+        self.homeAppLogFolder     = os.path.join(self.homeAppFolder, homeAppLogFolder)
+
+        if not os.path.exists(self.homeAppFolder):
+            os.mkdir(self.homeAppFolder)
+        if not os.path.exists(self.homeAppLogFolder):
+            os.mkdir(self.homeAppLogFolder)
+
+    def _initLogging(self):
+        """
+        Initializes paths of the application
+        """
+        fileName = 'errors_' + windowTitle.replace(' ', '-').lower() + '.log'
+        errorLogPath = os.path.join(self.homeAppLogFolder, fileName)
+        if debug:
+            level = logging.DEBUG
+        else:
+            level = logging.ERROR
+        configureLogging(errorLogPath, level)
+
     def _initDefaultValues(self):
         """
         Initializes default values
         """
-
-        self.homeFolder = os.path.expanduser("~")
 
         # Load resources
         self.idKey                   = self.conf_default_input['idKey']
@@ -258,7 +292,7 @@ class QuestionnaireProcessorUI(QtGui.QMainWindow):
                 custom = False
                 analyzedDataset = QuestionnaireProcessor(self.sourceFolder, self.destinationFolder, responseKey, idKey, categoryKey, 
                                                          answerKey, scoreKey, idList, categoryList, answerList, scoreList, custom, 
-                                                         caseInsensitiveComparison,self)
+                                                         caseInsensitiveComparison, self)
 
                 if analyzedDataset:
                     print("Output saved to " + self.destinationFolder)
@@ -422,8 +456,8 @@ class QuestionnaireProcessorUI(QtGui.QMainWindow):
 
                 ## combine checks and show error if applicable
                 if nid == ncategory == nscore and scoreCheck and numberCheck:
-                    analyzedDataset = QuestionnaireProcessor(self.sourceFolder, self.destinationFolder, responseKey, idKey, categoryKey, 
-                                                             answerKey, scoreKey, idList, categoryList, answerList, scoreList, custom, 
+                    analyzedDataset = QuestionnaireProcessor(self.sourceFolder, self.destinationFolder, responseKey, idKey, categoryKey,
+                                                             answerKey, scoreKey, idList, categoryList, answerList, scoreList, custom,
                                                              caseInsensitiveComparison, self)
 
                     if analyzedDataset:
@@ -533,7 +567,7 @@ class QuestionnaireProcessorUI(QtGui.QMainWindow):
         """
         Select folder to read csv files from
         """
-        selectedFolder = QtGui.QFileDialog.getExistingDirectory(self, "Select Directory", directory=self.inputFolderLocation.text())
+        selectedFolder = QtWidgets.QFileDialog.getExistingDirectory(self, "Select Directory", directory=self.inputFolderLocation.text())
         # Prevent erasing previous entry on cancel press
         if selectedFolder:
             self.sourceFolder = selectedFolder
@@ -544,14 +578,12 @@ class QuestionnaireProcessorUI(QtGui.QMainWindow):
         """
         Set folder to write output to
         """
-        selectedDest = QtGui.QFileDialog.getExistingDirectory(self,"Save output in..", directory=self.outputFolderDestination.text())
+        selectedDest = QtWidgets.QFileDialog.getExistingDirectory(self,"Save output in..", directory=self.outputFolderDestination.text())
         # Prevent erasing previous entry on cancel press
         if selectedDest:
             self.destinationFolder = selectedDest
             self.outputFolderDestination.setText(os.path.normpath(self.destinationFolder))
             self.progressBar.setValue(0)
-
-
 
     def center(self):
         """
@@ -559,7 +591,7 @@ class QuestionnaireProcessorUI(QtGui.QMainWindow):
         """
         qr = self.frameGeometry()
         qr = self.frameGeometry()
-        cp = QtGui.QDesktopWidget().availableGeometry().center()
+        cp = QtWidgets.QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
         self.move(qr.topLeft())
 
@@ -567,11 +599,15 @@ class QuestionnaireProcessorUI(QtGui.QMainWindow):
         """
         Shows documentation window (with help and licensing info)
         """
+
+        title = "Documentation"
+        htmlFile = "helpfile.html"
+
         self.docWindow = QWebView()
         self.docWindow.closeEvent = self.closeDocWindow
-        self.docWindow.setWindowTitle("Documentation")
+        self.docWindow.setWindowTitle(title)
         self.docWindow.setWindowIcon(self.helpIcon)
-        self.docWindow.load(QtCore.QUrl(getResourceLoc("helpfile.html")))
+        self.docWindow.load(QtCore.QUrl.fromLocalFile(getResourceLoc(htmlFile)))
         self.docWindow.show()
 
     def closeDocWindow(self,source):
@@ -585,28 +621,43 @@ class QuestionnaireProcessorUI(QtGui.QMainWindow):
         """
         Shows about window
         """
-        msgBox = QtGui.QMessageBox(self)
-        msgBox.setWindowIcon(self.aboutIcon)
-        msgBox.about(msgBox,"About",aboutString)
+        about ="About"
 
-    def showErrorMessage(self,message):
+        msgBox = QtWidgets.QMessageBox(self)
+        msgBox.setWindowIcon(self.aboutIcon)
+        msgBox.about(self, about, aboutString)
+
+    def showErrorMessage(self, message):
         """
         Shows error message
         """
-
         error ="Error"
 
-        msgBox = QtGui.QMessageBox(self)
-        msgBox.about(msgBox,error,message)
+        msgBox = QtWidgets.QMessageBox(self)
+        msgBox.about(self, error, message)
+
+    def confirmEvent(self, message):
+        """
+        Confirm box
+        """
+        reply = QtWidgets.QMessageBox.question(self, 'Message',
+            message, QtWidgets.QMessageBox.Yes |
+            QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
+        if reply == QtWidgets.QMessageBox.Yes:
+            reply = True
+        else:
+            reply = False
+        return reply
 
     def closeEvent(self, event):
         """
         Confirm closing the main window
         """
-        reply = QtGui.QMessageBox.question(self, 'Message',
-            "Are you sure to quit?", QtGui.QMessageBox.Yes |
-            QtGui.QMessageBox.No, QtGui.QMessageBox.No)
-        if reply == QtGui.QMessageBox.Yes:
+        message = "Are you sure to quit?"
+
+        reply = self.confirmEvent(message)
+
+        if reply:
             event.accept()
         else:
             event.ignore()

@@ -23,18 +23,20 @@ import glob
 import errno
 import tempfile
 import tarfile
+import logging
 
 from configobj import ConfigObj
-from PyQt4 import QtCore, QtGui, uic
-from PyQt4.QtWebKit import QWebView
+from PyQt5 import QtCore, QtGui, QtWidgets, uic
+from PyQt5.QtWebKitWidgets import QWebView
 
+from libopensesametoolbox.logger import configureLogging
 from libopensesametoolbox.experimentmanager import ExperimentManager
 from libopensesametoolbox.questionnairecreator_ui import QuestionnaireCreatorUI
 from libopensesametoolbox.io_tools import OutLog, getResourceLoc, findOpensesamerun
 from libopensesametoolbox.clean_data import stringToBool
 
 
-version = "1.7.0"
+version = "1.9.1"
 author = "Bob Rosbag"
 email = "debian@bobrosbag.nl"
 
@@ -55,7 +57,7 @@ Copyright 2015
 """.format(version,author,email)
 
 
-class ExperimentManagerUI(QtGui.QMainWindow):
+class ExperimentManagerUI(QtWidgets.QMainWindow):
     """
     QT User interface
     """
@@ -68,6 +70,7 @@ class ExperimentManagerUI(QtGui.QMainWindow):
         self.fs = os.sep
         self._initConf()
         self._initHomeApp()
+        self._initLogging()
         self._initDefaultValues()
         self._initUI()
         self._initWidgets()
@@ -77,6 +80,7 @@ class ExperimentManagerUI(QtGui.QMainWindow):
         Initialize config file
         """
 
+        self.conf_default_io           = config['default_io']
         self.conf_experimentmanager_ui = config['experimentmanager_ui']
         self.conf_ui                   = config['ui']
 
@@ -87,21 +91,26 @@ class ExperimentManagerUI(QtGui.QMainWindow):
 
         self.homeFolder = os.path.expanduser("~")
 
-        homeAppFolderName         = self.conf_experimentmanager_ui['homeAppFolderName']
-        homeDataFolderName        = self.conf_experimentmanager_ui['homeDataFolderName']
+        homeAppFolderName         = self.conf_default_io['homeAppFolderName']
+        homeAppLogFolder          = self.conf_default_io['homeAppLogFolder']
+        homeDataFolderName        = self.conf_default_io['homeDataFolderName']
+
         homeExperimentFolderName  = self.conf_experimentmanager_ui['homeExperimentFolderName']
         dataTarFileName           = self.conf_experimentmanager_ui['dataTarFileName']
 
         self.homeAppFolder        = os.path.join(self.homeFolder, homeAppFolderName)
+        self.homeAppLogFolder     = os.path.join(self.homeAppFolder, homeAppLogFolder)
         self.homeDataFolder       = os.path.join(self.homeFolder, homeDataFolderName)
+
         self.homeExperimentFolder = os.path.join(self.homeDataFolder, homeExperimentFolderName)
         self.homeDataLogFolder    = os.path.join(self.homeDataFolder, 'logs')
-        #self.homeLogFolder =  os.join(self.homeAppFolder, 'log')
 
         self.dataTarFile = getResourceLoc(dataTarFileName)
 
-#        if not os.path.exists(self.homeAppFolder):
-#            os.makedir(self.homeAppFolder)
+        if not os.path.exists(self.homeAppFolder):
+            os.mkdir(self.homeAppFolder)
+        if not os.path.exists(self.homeAppLogFolder):
+            os.mkdir(self.homeAppLogFolder)
         if not os.path.exists(self.homeDataFolder):
             os.mkdir(self.homeDataFolder)
         if not os.path.exists(self.homeDataLogFolder):
@@ -109,6 +118,18 @@ class ExperimentManagerUI(QtGui.QMainWindow):
         if not os.path.exists(self.homeExperimentFolder):
             with tarfile.open(self.dataTarFile, "r:gz") as dataTar:
                 dataTar.extractall(path=self.homeDataFolder)
+
+    def _initLogging(self):
+        """
+        Initializes paths of the application
+        """
+        fileName = 'errors_' + windowTitle.replace(' ', '-').lower() + '.log'
+        errorLogPath = os.path.join(self.homeAppLogFolder, fileName)
+        if debug:
+            level = logging.DEBUG
+        else:
+            level = logging.ERROR
+        configureLogging(errorLogPath, level)
 
     def _initDefaultValues(self):
         """
@@ -126,7 +147,8 @@ class ExperimentManagerUI(QtGui.QMainWindow):
         self.opensesamerunCommandAuto = findOpensesamerun()
         self.settingsExtension = self.conf_experimentmanager_ui['settingsExtension']
         self.defaultName       = 'default.' + self.settingsExtension
-        self.extFinder         = self.settingsExtension + " (*." + self.settingsExtension + ")"
+        self.extFilterSettings = self.settingsExtension + " (*." + self.settingsExtension + ")"
+        self.extFilterAll      = "All Files" + " (*)"
 
         # default folders
         self.destinationFolder          = ""
@@ -203,9 +225,7 @@ class ExperimentManagerUI(QtGui.QMainWindow):
 
         # set context menu
         self.experimentListWidget.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
-        self.experimentListWidget.connect(self.experimentListWidget,
-                                          QtCore.SIGNAL("customContextMenuRequested(QPoint)"),
-                                          self.listItemRightClicked)
+        self.experimentListWidget.customContextMenuRequested.connect(self.listItemRightClicked)
 
         if not self.opensesamerunCommandAuto:
             self.opensesamerunLabel.show()
@@ -265,15 +285,9 @@ class ExperimentManagerUI(QtGui.QMainWindow):
         self.widgetItemObjectListDict = {}
         self.widgetItemNameListDict = {}
 
-        try:
-            self.languageComboBox.currentIndexChanged.disconnect(self.updateListWidget)
-        except:
-            pass
-
         self.experimentListWidget.clear()
         self.languageComboBox.clear()
         self.refreshWidgets()
-        self.languageComboBox.currentIndexChanged.connect(self.updateListWidget)
 
     def startExperiments(self):
         """
@@ -370,7 +384,7 @@ class ExperimentManagerUI(QtGui.QMainWindow):
                     pass
 
             if logFileExists:
-                overwriteCheck = self.confirmOverwriteEvent( "Log file(s) already exists, do you want to overwrite the log file(s)?")
+                overwriteCheck = self.confirmOverwriteEvent()
                 if not overwriteCheck:
                     return
                 else:
@@ -407,7 +421,7 @@ class ExperimentManagerUI(QtGui.QMainWindow):
         """
         Add right click context menu to the ListWidget
         """
-        self.listMenu= QtGui.QMenu()
+        self.listMenu= QtWidgets.QMenu()
         renameItem = self.listMenu.addAction("Rename Questionnaire on disk")
         removeItem = self.listMenu.addAction("Delete Questionnaire from disk")
 
@@ -452,12 +466,18 @@ class ExperimentManagerUI(QtGui.QMainWindow):
 
             fileExistsCheck = os.path.exists(destFilePath)
 
-            if fileExistsCheck and not noChange:
+            if fileExistsCheck and not noChange and go:
                 errorMessage = "A questionnaire with that filename already exists, please select another name"
                 self.showErrorMessage(errorMessage)
 
-
         if go and not fileExistsCheck:
+
+            try:
+                self.renameQuestionnaire(srcFilePath, destFilePath)
+            except Exception:
+                errorMessage = 'Access denied, cannot rename experiment, do you have the correct permissions?'
+                self.showErrorMessage(errorMessage)
+                return
 
             currentWidget.setText(destItemName)
 
@@ -466,9 +486,6 @@ class ExperimentManagerUI(QtGui.QMainWindow):
 
             nameindex = self.widgetItemNameListDict[currentItemLanguage].index(currentItemName)
             self.widgetItemNameListDict[currentItemLanguage][nameindex] = destItemName
-
-            self.renameQuestionnaire(srcFilePath, destFilePath)
-
 
     def removeItemClicked(self):
         """
@@ -482,14 +499,20 @@ class ExperimentManagerUI(QtGui.QMainWindow):
         currentItemLanguage = self.languageComboBox.currentText()
 
         if self.confirmDeleteEvent():
+
+            try:
+                self.removeQuestionnaire(currentItemName, currentItemLanguage)
+            except Exception:
+                errorMessage = 'Access denied, cannot delete experiment, do you have the correct permissions?'
+                self.showErrorMessage(errorMessage)
+                return
+
             widgetIndex = self.experimentListWidget.row(currentWidget)
             self.experimentListWidget.takeItem(widgetIndex)
 
             self.experimentFileListDict[currentItemLanguage].remove(currentItemName)
             self.widgetItemObjectListDict[currentItemLanguage].remove(currentWidget)
             self.widgetItemNameListDict[currentItemLanguage].remove(currentItemName)
-
-            self.removeQuestionnaire(currentItemName, currentItemLanguage)
 
     def renameQuestionnaire(self,srcFilePath,destFilePath):
         """
@@ -514,7 +537,7 @@ class ExperimentManagerUI(QtGui.QMainWindow):
             testfile = tempfile.TemporaryFile(dir = path)
             testfile.close()
             return True
-        except:
+        except Exception:
             return False
 
     def resetButtonClicked(self):
@@ -531,7 +554,7 @@ class ExperimentManagerUI(QtGui.QMainWindow):
         """
         Confirm box renaming item on disk
         """
-        reply = QtGui.QInputDialog.getText(self, "Please enter the new name.", "Filename:", QtGui.QLineEdit.Normal, original)
+        reply = QtWidgets.QInputDialog.getText(self, "Please enter the new name.", "Filename:", QtWidgets.QLineEdit.Normal, original)
         return reply
 
     def addMCQuestion(self):
@@ -617,45 +640,45 @@ class ExperimentManagerUI(QtGui.QMainWindow):
         """
         Save settings file dialog
         """
-        selectedSettingsDest = QtGui.QFileDialog.getSaveFileName(self,"Save output as..", self.defaultName, self.extFinder)
+        selectedSettingsDest = QtWidgets.QFileDialog.getSaveFileName(self,"Save output as..", self.defaultName, self.extFilterSettings)
         # Prevent erasing previous entry on cancel press
-        if selectedSettingsDest:
-            self.startSaveSettings(selectedSettingsDest)
+        if selectedSettingsDest[0]:
+            self.startSaveSettings(selectedSettingsDest[0])
 
     def selectOpenSettingsFile(self):
         """
         Open settings file dialog
         """
-        selectedSettingsLocation = QtGui.QFileDialog.getOpenFileName(self,"Open File..", self.defaultName, self.extFinder)
+        selectedSettingsLocation = QtWidgets.QFileDialog.getOpenFileName(self,"Open File..", self.defaultName, self.extFilterSettings)
         # Prevent erasing previous entry on cancel press
-        if selectedSettingsLocation:
-            self.startRestoreSettings(selectedSettingsLocation)
+        if selectedSettingsLocation[0]:
+            self.startRestoreSettings(selectedSettingsLocation[0])
 
     def selectOpensesamerunFile(self):
         """
         Set file to write output to
         """
-        selectedOpensesamerunLocation = QtGui.QFileDialog.getOpenFileName(self,"Open File..")
+        selectedOpensesamerunLocation = QtWidgets.QFileDialog.getOpenFileName(self,"Open File..", self.homeFolder, self.extFilterAll)
         # Prevent erasing previous entry on cancel press
-        if selectedOpensesamerunLocation:
-            self.opensesamerunCommandManual = selectedOpensesamerunLocation
+        if selectedOpensesamerunLocation[0]:
+            self.opensesamerunCommandManual = selectedOpensesamerunLocation[0]
             self.opensesamerunLineEdit.setText(os.path.normpath(self.opensesamerunCommandManual))
 
     def selectPythonFile(self):
         """
         Set file to write output to
         """
-        selectedPythonLocation = QtGui.QFileDialog.getOpenFileName(self,"Open File..")
+        selectedPythonLocation = QtWidgets.QFileDialog.getOpenFileName(self,"Open File..", self.homeFolder, self.extFilterAll)
         # Prevent erasing previous entry on cancel press
-        if selectedPythonLocation:
-            self.pythonCommandManual = selectedPythonLocation
+        if selectedPythonLocation[0]:
+            self.pythonCommandManual = selectedPythonLocation[0]
             self.pythonLineEdit.setText(os.path.normpath(self.pythonCommandManual))
 
     def selectInputFolderLocation(self):
         """
         Select folder to read csv files from
         """
-        selectedFolder = QtGui.QFileDialog.getExistingDirectory(self, "Select Directory", directory=self.inputFolderLocation.text())
+        selectedFolder = QtWidgets.QFileDialog.getExistingDirectory(self, "Select Directory", directory=self.inputFolderLocation.text())
         # Prevent erasing previous entry on cancel press
         if selectedFolder:
             self.sourceFolder = selectedFolder
@@ -666,7 +689,7 @@ class ExperimentManagerUI(QtGui.QMainWindow):
         """
         Set file to write output to
         """
-        selectedDest = QtGui.QFileDialog.getExistingDirectory(self, "Select Directory", self.logFolderDestination.text())
+        selectedDest = QtWidgets.QFileDialog.getExistingDirectory(self, "Select Directory", directory=self.logFolderDestination.text())
         # Prevent erasing previous entry on cancel press
         if selectedDest:
             self.destinationFolder = selectedDest
@@ -676,21 +699,16 @@ class ExperimentManagerUI(QtGui.QMainWindow):
         """
         Refresh widgets
         """
-        self.emptyListWidget()
+        try: self.languageComboBox.currentIndexChanged.disconnect(self.updateListWidget)
+        except Exception: pass
 
+        self.emptyListWidget()
         self.updateDirs()
         self.updateListWidgetItems()
-        try:
-            self.languageComboBox.currentIndexChanged.disconnect(self.updateListWidget)
-        except:
-            pass
         self.updateComboBoxItems()
-        try:
-            self.languageComboBox.currentIndexChanged.connect(self.updateListWidget)
-        except:
-            pass
-
         self.fillListWidget()
+
+        self.languageComboBox.currentIndexChanged.connect(self.updateListWidget)
 
     def updateDirs(self):
         """
@@ -812,9 +830,9 @@ class ExperimentManagerUI(QtGui.QMainWindow):
         """
         Create a ListWidget item
         """
-        listWidgetItem = QtGui.QListWidgetItem(widgetItem)
+        listWidgetItem = QtWidgets.QListWidgetItem(widgetItem)
         listWidgetItem.setCheckState(QtCore.Qt.Checked)
-        listWidgetItem.setFlags(QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsDragEnabled | QtCore.Qt.ItemIsDropEnabled)
+        listWidgetItem.setFlags(QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsDragEnabled)
 
         return listWidgetItem
 
@@ -1033,7 +1051,7 @@ class ExperimentManagerUI(QtGui.QMainWindow):
                     targetWidget.setCheckState(QtCore.Qt.Checked)
                     self.experimentListWidget.insertItem(counter,targetWidget)
                     counter += 1
-                except:
+                except Exception:
                     errorMessageExperimentList.append('- ' + selectedExperiment + ' not found in data, not restoring this item.\n')
         else:
             errorMessageList.append('- No experiments present in restore file! Cannot restore experiments.\n')
@@ -1055,8 +1073,7 @@ class ExperimentManagerUI(QtGui.QMainWindow):
         Centers the main app window on the screen
         """
         qr = self.frameGeometry()
-        qr = self.frameGeometry()
-        cp = QtGui.QDesktopWidget().availableGeometry().center()
+        cp = QtWidgets.QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
         self.move(qr.topLeft())
 
@@ -1064,13 +1081,10 @@ class ExperimentManagerUI(QtGui.QMainWindow):
         """
         Confirm box deleting item from disk
         """
-        reply = QtGui.QMessageBox.question(self, 'Message',
-            "Are you sure to delete this questionnaire from disk?", QtGui.QMessageBox.Yes |
-            QtGui.QMessageBox.No, QtGui.QMessageBox.No)
-        if reply == QtGui.QMessageBox.Yes:
-            return True
-        else:
-            return False
+        message = "Are you sure to delete this questionnaire from disk?"
+
+        reply = self.confirmEvent(message)
+        return reply
 
     def confirmResetEvent(self):
         """
@@ -1078,25 +1092,30 @@ class ExperimentManagerUI(QtGui.QMainWindow):
         """
         message = "Are you sure you want to reset the experiment selection and order?"
 
-        reply = QtGui.QMessageBox.question(self, 'Message', message, QtGui.QMessageBox.Yes |
-            QtGui.QMessageBox.No, QtGui.QMessageBox.No)
-        if reply == QtGui.QMessageBox.Yes:
-            return True
-        else:
-            return False
+        reply = self.confirmEvent(message)
+        return reply
 
-    def confirmOverwriteEvent(self, message):
+    def confirmOverwriteEvent(self):
+        """
+        Confirm box deleting item from disk
+        """
+        message =  "Log file(s) already exists, do you want to overwrite the log file(s)?"
+
+        reply = self.confirmEvent(message)
+        return reply
+
+    def confirmEvent(self, message):
         """
         Confirm box overwriting (log) files
         """
-        reply = QtGui.QMessageBox.question(self, 'Message',
-            message, QtGui.QMessageBox.Yes |
-            QtGui.QMessageBox.No, QtGui.QMessageBox.No)
-        if reply == QtGui.QMessageBox.Yes:
-            overwrite = True
+        reply = QtWidgets.QMessageBox.question(self, 'Message',
+            message, QtWidgets.QMessageBox.Yes |
+            QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
+        if reply == QtWidgets.QMessageBox.Yes:
+            reply = True
         else:
-            overwrite = False
-        return overwrite
+            reply = False
+        return reply
 
     def showDocWindow(self):
         """
@@ -1110,7 +1129,7 @@ class ExperimentManagerUI(QtGui.QMainWindow):
         self.docWindow.closeEvent = self.closeDocWindow
         self.docWindow.setWindowTitle(title)
         self.docWindow.setWindowIcon(self.helpIcon)
-        self.docWindow.load(QtCore.QUrl(getResourceLoc(htmlFile)))
+        self.docWindow.load(QtCore.QUrl.fromLocalFile(getResourceLoc(htmlFile)))
         self.docWindow.show()
 
     def closeDocWindow(self,source):
@@ -1124,31 +1143,30 @@ class ExperimentManagerUI(QtGui.QMainWindow):
         """
         Shows about window
         """
-
         about ="About"
 
-        msgBox = QtGui.QMessageBox(self)
+        msgBox = QtWidgets.QMessageBox(self)
         msgBox.setWindowIcon(self.aboutIcon)
-        msgBox.about(msgBox,about,aboutString)
+        msgBox.about(self, about, aboutString)
 
-    def showErrorMessage(self,message):
+    def showErrorMessage(self, message):
         """
-        Shows about window
+        Shows error message
         """
-
         error ="Error"
 
-        msgBox = QtGui.QMessageBox(self)
-        msgBox.about(msgBox,error,message)
+        msgBox = QtWidgets.QMessageBox(self)
+        msgBox.about(self, error, message)
 
     def closeEvent(self, event):
         """
         Confirm closing the main window
         """
-        reply = QtGui.QMessageBox.question(self, 'Message',
-            "Are you sure to quit?", QtGui.QMessageBox.Yes |
-            QtGui.QMessageBox.No, QtGui.QMessageBox.No)
-        if reply == QtGui.QMessageBox.Yes:
+        message = "Are you sure to quit?"
+
+        reply = self.confirmEvent(message)
+
+        if reply:
             event.accept()
         else:
             event.ignore()

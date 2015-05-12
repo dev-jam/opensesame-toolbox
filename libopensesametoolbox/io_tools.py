@@ -20,7 +20,7 @@ Refer to <http://www.gnu.org/licenses/> for a copy of the GNU General Public Lic
 import sys
 import os
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui
 
 
 def getResourceLoc(item):

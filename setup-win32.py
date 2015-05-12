@@ -37,7 +37,7 @@ if sys.platform == 'win32':
 
 options = {
     'build_exe': {
-        'includes': 'atexit',
+        'includes': ['atexit', 'PyQt5.QtPrintSupport'], 
         'include_msvcr': True,
         'include_files': [('resources','resources')	]
     }

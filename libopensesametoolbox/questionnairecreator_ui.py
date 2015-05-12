@@ -21,7 +21,7 @@ import os
 import sys
 import errno
 
-from PyQt4 import QtGui, uic
+from PyQt5 import QtWidgets, uic
 from configobj import ConfigObj
 
 from libopensesametoolbox.questionnairecreator import QuestionnaireCreator
@@ -31,7 +31,7 @@ from libopensesametoolbox.clean_data import cleanUpString, cleanUpStringList, re
 config = ConfigObj(getResourceLoc('opensesame-toolbox.conf'))
 
 
-class QuestionnaireCreatorUI(QtGui.QDialog):
+class QuestionnaireCreatorUI(QtWidgets.QDialog):
 
     """GUI Class to create questionnaires"""
 
@@ -377,12 +377,11 @@ class QuestionnaireCreatorUI(QtGui.QDialog):
 
         return [self.baseName, self.languageString]
 
-    def showErrorMessage(self,message):
+    def showErrorMessage(self, message):
         """
-        Shows about window
+        Shows error message
         """
-
         error ="Error"
 
-        msgBox = QtGui.QMessageBox(self)
-        msgBox.about(msgBox,error,message)
+        msgBox = QtWidgets.QMessageBox(self)
+        msgBox.about(self, error, message)

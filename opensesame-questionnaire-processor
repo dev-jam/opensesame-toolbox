@@ -18,38 +18,37 @@ Refer to <http://www.gnu.org/licenses/> for a copy of the GNU General Public Lic
 @author Bob Rosbag
 """
 
-
 import sys
 import os
 
-from PyQt4 import QtGui
+from PyQt5 import QtWidgets
+from configobj import ConfigObj
 
 from libopensesametoolbox.questionnaireprocessor import QuestionnaireProcessor
+from libopensesametoolbox.questionnaireprocessor_ui import QuestionnaireProcessorUI
+from libopensesametoolbox.io_tools import getResourceLoc
+
+config = ConfigObj(getResourceLoc('opensesame-toolbox.conf'))
+
 
 def main():
     if len(sys.argv) == 1:
-        from libopensesametoolbox.questionnaireprocessor_ui import QuestionnaireProcessorUI
-        app = QtGui.QApplication(sys.argv)
+        app = QtWidgets.QApplication(sys.argv)
         win = QuestionnaireProcessorUI()
         win.show()
         sys.exit(app.exec_())
-
     elif len(sys.argv) == 2:
-             errorMessage = "Not enough arguments, without GUI at minimum the input folder and output folder have to be given."
+             errorMessage = "Not enough arguments, without a GUI at the input directory and output directory have to be given."
              print(errorMessage, file=sys.stderr)
     elif len(sys.argv) == 3:
         if not os.path.isdir(sys.argv[1]):
-            errorMessage = "Error: The specified input folder is invalid"
+            errorMessage = "Error: The specified input folder is not a valid directory"
             print(errorMessage, file=sys.stderr)
         elif not os.path.isdir(sys.argv[2]):
-            errorMessage = "Error: The specified output folder is invalid"
+            errorMessage = "Error: The specified output folder is not a valid directory"
             print(errorMessage, file=sys.stderr)
         else:
-            from libexperimentmanager.io_tools import getResourceLoc
-            from configobj import ConfigObj
-            config = ConfigObj(getResourceLoc('opensesame-toolbox.conf'))
             conf_default_input = config['default_input']
-
 
             idKey        = conf_default_input['idKey']
             responseKey  = conf_default_input['responseKey']
@@ -66,10 +65,9 @@ def main():
                                    idList, categoryList, answerString, scoreList, custom, ui=None)
 
     else:
-        errorMessage = "Too many arguments given. This command only accepts start of the gui or a cmd with an input folder and an output folder."
+        errorMessage = ("Too many arguments given. No parameters given starts the GUI and two parameters given, "
+                        "a source directory name and a destination directory name starts the automated processing.")
         print(errorMessage, file=sys.stderr)
 
 if __name__ == "__main__":
     main()
-else:
-    pass
