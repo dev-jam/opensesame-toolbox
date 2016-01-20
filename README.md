@@ -17,19 +17,19 @@ DOCUMENTATION AND INSTALLATION INSTRUCTIONS
 -------------------------------------------
 This is a standalone program that does not need to be installed. Make sure your 
 python environment meets all dependencies specified below and that all files in
-this repository are located in the same folder. This program only works in Python 3
+this repository are located in the same folder. This program only works in Python3.
 
 If you want to use the GUI simply run the program by
 
-    python opensesame-questionnaire-manager
+    python3 opensesame-experiment-manager
     and/or
-    python opensesame-questionnaire-processor
+    python3 opensesame-questionnaire-processor
 
-It is also possible to use the program from CLI:
+It is also possible to use OpenSesame Questionnaire Processor from CLI:
 
-    python opensesame-questionnaire-processor <source_folder> [<target_folder>]
+    python3 opensesame-questionnaire-processor <source_folder> [<target_folder>]
 
-To use the CLI method it is required the questionnaires originate from the OpenSesame Questionnaire Manager or contain the same column names in the log files
+To use the CLI method it is required the questionnaires originate from the OpenSesame Questionnaire Manager or contain the same column names in the log files.
 
 
 DEPENDENCIES
