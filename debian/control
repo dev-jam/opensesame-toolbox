@@ -10,7 +10,7 @@ Standards-Version: 3.9.5
 Package: opensesame-toolbox
 Architecture: all
 Depends: ${misc:Depends}, ${python:Depends}, python3 (>= 3.2),
-   python3-pyqt5, python3-numpy, python3-configobj
+   python3-pyqt5, python3-pyqt5.qtwebkit, python3-numpy, python3-configobj
 Recommends: opensesame
 Description: OpenSesame Experiment Manager and OpenSesame Questionnaire Processor
  OpenSesame Toolbox offers two applications to supplement OpenSesame. 

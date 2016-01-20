@@ -1,5 +1,5 @@
-opensesame-toolbox (1.9.1-1) UNRELEASED; urgency=low
+opensesame-toolbox (1.9.2-1) UNRELEASED; urgency=low
 
   * Initial release. (Closes: #XXXXXX)
 
- -- Bob Rosbag <debian@bobrosbag.nl>  Sat, 09 May 2015 04:00:57 +0200
+ -- Bob Rosbag <debian@bobrosbag.nl>  Sat, 14 May 2015 04:00:57 +0200

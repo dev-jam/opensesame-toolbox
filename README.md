@@ -4,7 +4,7 @@ Copyright Bob Rosbag (2015)
 
 ABOUT
 -----
-Current version: 1.9.1
+Current version: 1.9.2
 
 OpenSesame Toolbox offers two applications to supplement OpenSesame.  
   
@@ -35,6 +35,6 @@ To use the CLI method it is required the questionnaires originate from the OpenS
 DEPENDENCIES
 ------------
 - Python 3.4 <https://www.python.org>
-- PyQt5 (QtCore, QtWidgets, QtGui, QWebView uic) <http://www.riverbankcomputing.com/software/pyqt/download>
+- PyQt5 (QtGui, QtCore, uic) <http://www.riverbankcomputing.com/software/pyqt/download>
 - NumPy <http://http://www.numpy.org>
 - ConfigObj <http://www.voidspace.org.uk/python/configobj.html>

@@ -36,12 +36,14 @@ setup(name="opensesame-toolbox",
 	packages = [ \
 		"libopensesametoolbox", \
 		],
-	package_dir = { \
-		"libopensesametoolbox" : "libopensesametoolbox", \
+	package_dir = {
+		"libopensesametoolbox" : "libopensesametoolbox", 
 		},
 	data_files=[
-		("/usr/share/opensesame-toolbox", ["COPYING"]), \
-		("/usr/share/applications", ["data/opensesame-experiment-manager.desktop","data/opensesame-questionnaire-processor.desktop"]), \
+		("/usr/share/icons/hicolor/scalable/apps", ["data/opensesame-toolbox.svg"]),
+		("/usr/share/opensesame-toolbox", ["COPYING"]),
+		("/usr/share/mime/packages", ["data/x-opensesame-experiment-manager.xml"]),
+		("/usr/share/applications", ["data/opensesame-experiment-manager.desktop","data/opensesame-questionnaire-processor.desktop"]),
 		("/usr/share/opensesame-toolbox/resources", glob.glob("resources/*")),
 		]
 	)

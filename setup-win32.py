@@ -27,9 +27,6 @@ from cx_Freeze import setup, Executable
 
 from libopensesametoolbox import experimentmanager_ui
 
-build_exe_options = {
-"include_msvcr": True   #skip error msvcr100.dll missing
-}
 
 base = None
 if sys.platform == 'win32':

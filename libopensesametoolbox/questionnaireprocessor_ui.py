@@ -30,7 +30,7 @@ from libopensesametoolbox.questionnaireprocessor import QuestionnaireProcessor
 from libopensesametoolbox.io_tools import OutLog, getResourceLoc
 from libopensesametoolbox.clean_data import cleanUpString, cleanUpStringList, removeJunk, stringToBool
 
-version = "1.9.1"
+version = "1.9.2"
 author = "Bob Rosbag"
 email = "debian@bobrosbag.nl"
 
