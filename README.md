@@ -29,7 +29,7 @@ It is also possible to use OpenSesame Questionnaire Processor from CLI:
 
     python3 opensesame-questionnaire-processor <source_folder> [<target_folder>]
 
-To use the CLI method it is required the questionnaires originate from the OpenSesame Questionnaire Manager or contain the same column names in the log files.
+To use the CLI method it is required the questionnaires originate from the OpenSesame Experiment Manager or contain the same column names in the log files.
 
 
 DEPENDENCIES
