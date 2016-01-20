@@ -34,7 +34,7 @@ To use the CLI method it is required the questionnaires originate from the OpenS
 
 DEPENDENCIES
 ------------
-- Python 3.4 <https://www.python.org>
+- Python3 (> 3.4) <https://www.python.org>
 - PyQt5 (QtGui, QtCore, uic) <http://www.riverbankcomputing.com/software/pyqt/download>
 - NumPy <http://http://www.numpy.org>
 - ConfigObj <http://www.voidspace.org.uk/python/configobj.html>
