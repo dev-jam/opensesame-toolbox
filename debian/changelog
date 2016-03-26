@@ -1,4 +1,10 @@
-opensesame-toolbox (1.9.2-1) UNRELEASED; urgency=low
+opensesame-toolbox (2.0-1) jessie; urgency=medium
+
+  * Major GUI changes.
+
+ -- Bob Rosbag <debian@bobrosbag.nl>  Sat, 26 Mar 2016 02:09:13 +0100
+
+opensesame-toolbox (1.9.2-1) jessie; urgency=low
 
   * Initial release. (Closes: #XXXXXX)
 

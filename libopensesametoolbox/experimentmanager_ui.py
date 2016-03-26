@@ -159,10 +159,7 @@ class ExperimentManagerUI(QtWidgets.QMainWindow):
 
         # default text
         self.windowTitle = self.conf_experimentmanager_ui['windowTitle']
-
-        # default window resolution
-        self.windowHorizontalResolution = int(self.conf_experimentmanager_ui['windowHorizontalResolution'])
-        self.windowVerticalResolution   = int(self.conf_experimentmanager_ui['windowVerticalResolution'])
+        self.StatusBoxHeight = int(self.conf_experimentmanager_ui['StatusBoxHeight'])
 
         # default folder
         self.sourceFolder = self.homeExperimentFolder
@@ -188,6 +185,13 @@ class ExperimentManagerUI(QtWidgets.QMainWindow):
 
         # Load and setup UI
         uic.loadUi(self.uiPath, self)
+
+        self.windowHorizontalResolution = self.width()
+
+        if verbose:
+            self.windowVerticalResolution  = self.height()
+        else:
+            self.windowVerticalResolution  = self.height() - self.StatusBoxHeight
 
         # set default window values
         self.setWindowIcon(self.windowIcon)

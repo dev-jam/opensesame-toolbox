@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>530</width>
-    <height>892</height>
+    <width>840</width>
+    <height>870</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,8 +17,8 @@
    <widget class="QPushButton" name="processButton">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>850</y>
+      <x>370</x>
+      <y>580</y>
       <width>100</width>
       <height>24</height>
      </rect>
@@ -30,300 +30,11 @@
      <string>Process</string>
     </property>
    </widget>
-   <widget class="QWidget" name="gridLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>15</y>
-      <width>491</width>
-      <height>831</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="gridLayout">
-     <property name="verticalSpacing">
-      <number>14</number>
-     </property>
-     <item row="18" column="0" colspan="3">
-      <widget class="QTextEdit" name="statusBox">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="html">
-        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'DejaVu Sans'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2'; font-size:8pt;&quot;&gt;Ready.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="inputFolderLabel">
-       <property name="text">
-        <string>Data Folder</string>
-       </property>
-      </widget>
-     </item>
-     <item row="12" column="0" alignment="Qt::AlignTop">
-      <widget class="QLabel" name="idCustomLabel">
-       <property name="text">
-        <string>ID</string>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="0">
-      <widget class="QLabel" name="answerScoreColumnLabel">
-       <property name="text">
-        <string>Answer Score Column Name</string>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="0">
-      <widget class="QLabel" name="categoryColumnLabel">
-       <property name="text">
-        <string>Category Column Name</string>
-       </property>
-      </widget>
-     </item>
-     <item row="9" column="1">
-      <widget class="QLineEdit" name="answerOptionColumnLineEdit"/>
-     </item>
-     <item row="1" column="2">
-      <widget class="QPushButton" name="inputFolderButton">
-       <property name="toolTip">
-        <string>Select folder containing the data files</string>
-       </property>
-       <property name="text">
-        <string>Select</string>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="1">
-      <widget class="QLineEdit" name="answerScoreColumnLineEdit"/>
-     </item>
-     <item row="13" column="1">
-      <widget class="QPlainTextEdit" name="categoryCustomPlainTextEdit">
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>16777215</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="15" column="0" alignment="Qt::AlignTop">
-      <widget class="QLabel" name="scoreCustomLabel">
-       <property name="text">
-        <string>Score</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0" colspan="3">
-      <widget class="QLabel" name="image">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>80</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>80</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="0">
-      <widget class="QLabel" name="idColumnLabel">
-       <property name="text">
-        <string>ID Column Name</string>
-       </property>
-      </widget>
-     </item>
-     <item row="14" column="0">
-      <widget class="QLabel" name="answerCustomLabel">
-       <property name="text">
-        <string>Answer Possibilities</string>
-       </property>
-      </widget>
-     </item>
-     <item row="9" column="0">
-      <widget class="QLabel" name="answerOptionColumnLabel">
-       <property name="text">
-        <string>Answer Options Column Name</string>
-       </property>
-      </widget>
-     </item>
-     <item row="14" column="1">
-      <widget class="QLineEdit" name="answerCustomLineEdit"/>
-     </item>
-     <item row="6" column="1">
-      <widget class="QLineEdit" name="idColumnLineEdit"/>
-     </item>
-     <item row="8" column="1">
-      <widget class="QLineEdit" name="categoryColumnLineEdit"/>
-     </item>
-     <item row="20" column="0" colspan="3">
-      <widget class="QLabel" name="label">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="0">
-      <widget class="QLabel" name="responseColumnLabel">
-       <property name="text">
-        <string>Response Column Name</string>
-       </property>
-      </widget>
-     </item>
-     <item row="16" column="0" colspan="3">
-      <widget class="Line" name="line_2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="19" column="0" colspan="3">
-      <widget class="QProgressBar" name="progressBar">
-       <property name="value">
-        <number>0</number>
-       </property>
-      </widget>
-     </item>
-     <item row="12" column="1">
-      <widget class="QPlainTextEdit" name="idCustomPlainTextEdit">
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>16777215</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="outputFolderLabel">
-       <property name="text">
-        <string>Output Folder</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0" colspan="3">
-      <widget class="Line" name="line">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="13" column="0" alignment="Qt::AlignTop">
-      <widget class="QLabel" name="categoryCustomLabel">
-       <property name="text">
-        <string>Category</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="inputFolderLocation">
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="2">
-      <widget class="QPushButton" name="outputFolderButton">
-       <property name="toolTip">
-        <string>Select destination to save the score file to</string>
-       </property>
-       <property name="text">
-        <string>Save to</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLineEdit" name="outputFolderDestination">
-       <property name="dragEnabled">
-        <bool>false</bool>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="15" column="1">
-      <widget class="QPlainTextEdit" name="scoreCustomPlainTextEdit">
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>16777215</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="1">
-      <widget class="QLineEdit" name="responseColumnLineEdit"/>
-     </item>
-     <item row="3" column="0">
-      <widget class="QCheckBox" name="caseInsensitiveCheckBox">
-       <property name="text">
-        <string>Case Insensitive Processing</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QCheckBox" name="customColumnCheckBox">
-       <property name="text">
-        <string>Custom Column Names</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QCheckBox" name="customExperimentCheckBox">
-       <property name="text">
-        <string>Custom Experiment</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
    <widget class="QPushButton" name="docButton">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>850</y>
+      <x>760</x>
+      <y>580</y>
       <width>31</width>
       <height>23</height>
      </rect>
@@ -348,8 +59,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="aboutButton">
     <property name="geometry">
      <rect>
-      <x>480</x>
-      <y>850</y>
+      <x>790</x>
+      <y>580</y>
       <width>31</width>
       <height>23</height>
      </rect>
@@ -369,6 +80,530 @@ p, li { white-space: pre-wrap; }
       <width>18</width>
       <height>18</height>
      </size>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>230</y>
+      <width>371</width>
+      <height>291</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Custom Experiment Settings</string>
+    </property>
+    <widget class="QLabel" name="idCustomLabel">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>30</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>ID</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="categoryCustomLabel">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>110</y>
+       <width>57</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Category</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="answerCustomLabel">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>190</y>
+       <width>122</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Answer Possibilities</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="scoreCustomLabel">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>220</y>
+       <width>36</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Score</string>
+     </property>
+    </widget>
+    <widget class="QPlainTextEdit" name="idCustomPlainTextEdit">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>30</y>
+       <width>201</width>
+       <height>70</height>
+      </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>16777215</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPlainTextEdit" name="categoryCustomPlainTextEdit">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>110</y>
+       <width>201</width>
+       <height>70</height>
+      </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>16777215</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="answerCustomLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>190</y>
+       <width>201</width>
+       <height>23</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPlainTextEdit" name="scoreCustomPlainTextEdit">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>220</y>
+       <width>201</width>
+       <height>70</height>
+      </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>16777215</height>
+      </size>
+     </property>
+    </widget>
+    <zorder>answerCustomLabel</zorder>
+    <zorder>answerCustomLineEdit</zorder>
+    <zorder>idCustomPlainTextEdit</zorder>
+    <zorder>idCustomLabel</zorder>
+    <zorder>scoreCustomLabel</zorder>
+    <zorder>categoryCustomPlainTextEdit</zorder>
+    <zorder>scoreCustomPlainTextEdit</zorder>
+    <zorder>categoryCustomLabel</zorder>
+    <zorder>idCustomLabel</zorder>
+    <zorder>categoryCustomLabel</zorder>
+    <zorder>answerCustomLabel</zorder>
+    <zorder>scoreCustomLabel</zorder>
+    <zorder>idCustomPlainTextEdit</zorder>
+    <zorder>categoryCustomPlainTextEdit</zorder>
+    <zorder>answerCustomLineEdit</zorder>
+    <zorder>scoreCustomPlainTextEdit</zorder>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>230</y>
+      <width>421</width>
+      <height>291</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Custom Column Names</string>
+    </property>
+    <widget class="QLabel" name="idColumnLabel">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>30</y>
+       <width>102</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>ID Column Name</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="responseColumnLabel">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>60</y>
+       <width>152</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Response Column Name</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="categoryColumnLabel">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>90</y>
+       <width>146</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Category Column Name</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="answerOptionColumnLabel">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>120</y>
+       <width>187</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Answer Options Column Name</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="answerScoreColumnLabel">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>150</y>
+       <width>175</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Answer Score Column Name</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="idColumnLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>30</y>
+       <width>201</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="responseColumnLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>60</y>
+       <width>201</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="categoryColumnLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>90</y>
+       <width>201</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="answerOptionColumnLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>120</y>
+       <width>201</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="answerScoreColumnLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>150</y>
+       <width>201</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_3">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>110</y>
+      <width>421</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Data Settings</string>
+    </property>
+    <widget class="QLabel" name="inputFolderLabel">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>30</y>
+       <width>73</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Data Folder</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="inputFolderLocation">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>30</y>
+       <width>211</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="outputFolderDestination">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>60</y>
+       <width>211</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="dragEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="outputFolderLabel">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>60</y>
+       <width>86</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Output Folder</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="inputFolderButton">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>30</y>
+       <width>80</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>Select folder containing the data files</string>
+     </property>
+     <property name="text">
+      <string>Select</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="outputFolderButton">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>60</y>
+       <width>80</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>Select destination to save the score file to</string>
+     </property>
+     <property name="text">
+      <string>Save to</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_4">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>110</y>
+      <width>371</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Options</string>
+    </property>
+    <widget class="QCheckBox" name="caseInsensitiveCheckBox">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>20</y>
+       <width>198</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Case Insensitive Processing</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="customColumnCheckBox">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>50</y>
+       <width>168</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Custom Column Names</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="customExperimentCheckBox">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>80</y>
+       <width>145</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Custom Experiment</string>
+     </property>
+    </widget>
+    <zorder>caseInsensitiveCheckBox</zorder>
+    <zorder>customColumnCheckBox</zorder>
+    <zorder>groupBox_2</zorder>
+    <zorder>customExperimentCheckBox</zorder>
+   </widget>
+   <widget class="QTextEdit" name="statusBox">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>630</y>
+      <width>801</width>
+      <height>221</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>16777215</height>
+     </size>
+    </property>
+    <property name="html">
+     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2'; font-size:8pt;&quot;&gt;Ready.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QProgressBar" name="progressBar">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>540</y>
+      <width>801</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="value">
+     <number>0</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>21</x>
+      <y>872</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="image">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>16</y>
+      <width>491</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>80</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>80</height>
+     </size>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>

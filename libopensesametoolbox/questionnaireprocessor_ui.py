@@ -145,10 +145,8 @@ class QuestionnaireProcessorUI(QtWidgets.QMainWindow):
 
         # default text
         self.windowTitle = self.conf_questionnaireprocessor_ui['windowTitle']
+        self.StatusBoxHeight = int(self.conf_questionnaireprocessor_ui['StatusBoxHeight'])
 
-        # default window resolution
-        self.windowHorizontalResolution = int(self.conf_questionnaireprocessor_ui['windowHorizontalResolution'])
-        self.windowVerticalResolution  = int(self.conf_questionnaireprocessor_ui['windowVerticalResolution'])
 
 
     def _initUI(self):
@@ -166,6 +164,13 @@ class QuestionnaireProcessorUI(QtWidgets.QMainWindow):
 
         # Load and setup UI
         uic.loadUi(self.uiPath, self)
+
+        self.windowHorizontalResolution = self.width()
+
+        if verbose:
+            self.windowVerticalResolution  = self.height()
+        else:
+            self.windowVerticalResolution  = self.height() - self.StatusBoxHeight
 
         # set default window values
         self.setWindowIcon(self.windowIcon)
@@ -207,7 +212,7 @@ class QuestionnaireProcessorUI(QtWidgets.QMainWindow):
         self.answerOptionColumnLineEdit.hide()
         self.answerScoreColumnLabel.hide()
         self.answerScoreColumnLineEdit.hide()
-        self.line_2.hide()
+        #self.line_2.hide()
 
         ## hide custom score elements
         self.idCustomLabel.hide()
@@ -494,7 +499,7 @@ class QuestionnaireProcessorUI(QtWidgets.QMainWindow):
             self.answerOptionColumnLineEdit.show()
             self.answerScoreColumnLabel.show()
             self.answerScoreColumnLineEdit.show()
-            self.line_2.show()
+            #self.line_2.show()
 
             self.customExperimentCheckBox.show()
 
@@ -511,7 +516,7 @@ class QuestionnaireProcessorUI(QtWidgets.QMainWindow):
             self.answerOptionColumnLineEdit.hide()
             self.answerScoreColumnLabel.hide()
             self.answerScoreColumnLineEdit.hide()
-            self.line_2.hide()
+            #self.line_2.hide()
 
             self.customExperimentCheckBox.hide()
             self.idCustomLabel.hide()

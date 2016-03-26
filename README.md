@@ -4,7 +4,7 @@ Copyright Bob Rosbag (2015)
 
 ABOUT
 -----
-Current version: 1.9.2
+Current version: 2.0
 
 OpenSesame Toolbox offers two applications to supplement OpenSesame.  
   
@@ -17,18 +17,19 @@ DOCUMENTATION AND INSTALLATION INSTRUCTIONS
 -------------------------------------------
 This is a standalone program that does not need to be installed. Make sure your 
 python environment meets all dependencies specified below and that all files in
-this repository are located in the same folder. This program only works in Python3.
+this repository are located in the same folder. This program only works in Python 3.
 
 If you want to use the GUI simply run the program by
 
-    python3 opensesame-experiment-manager
+    python opensesame-experiment-manager
     and/or
-    python3 opensesame-questionnaire-processor
+    python opensesame-questionnaire-processor
 
 It is also possible to use OpenSesame Questionnaire Processor from CLI:
 
-    python3 opensesame-questionnaire-processor <source_folder> [<target_folder>]
+    python opensesame-questionnaire-processor <source_folder> [<target_folder>]
 
+In linux where Python 2 is default, <python3> has to be used as cmd instead of <python>
 To use the CLI method it is required the questionnaires originate from the OpenSesame Experiment Manager or contain the same column names in the log files.
 
 
