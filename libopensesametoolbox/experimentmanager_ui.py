@@ -36,7 +36,7 @@ from libopensesametoolbox.io_tools import OutLog, getResourceLoc, findOpensesame
 from libopensesametoolbox.clean_data import stringToBool
 
 
-version = "2.0"
+version = "2.0.1"
 author = "Bob Rosbag"
 email = "debian@bobrosbag.nl"
 
