@@ -289,7 +289,7 @@
      <x>20</x>
      <y>500</y>
      <width>431</width>
-     <height>51</height>
+     <height>61</height>
     </rect>
    </property>
    <property name="title">
@@ -299,7 +299,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>20</y>
+      <y>30</y>
       <width>62</width>
       <height>16</height>
      </rect>
@@ -312,7 +312,7 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>20</y>
+      <y>30</y>
       <width>251</width>
       <height>20</height>
      </rect>
@@ -331,7 +331,7 @@
      <x>470</x>
      <y>50</y>
      <width>431</width>
-     <height>501</height>
+     <height>511</height>
     </rect>
    </property>
    <property name="title">
@@ -535,7 +535,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Add Questions</string>
+    <string>OK</string>
    </property>
   </widget>
   <widget class="QLabel" name="label">
