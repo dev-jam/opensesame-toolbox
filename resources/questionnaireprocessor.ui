@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>840</width>
-    <height>870</height>
+    <height>896</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>370</x>
-      <y>580</y>
+      <y>610</y>
       <width>100</width>
       <height>24</height>
      </rect>
@@ -34,7 +34,7 @@
     <property name="geometry">
      <rect>
       <x>760</x>
-      <y>580</y>
+      <y>610</y>
       <width>31</width>
       <height>23</height>
      </rect>
@@ -60,7 +60,7 @@
     <property name="geometry">
      <rect>
       <x>790</x>
-      <y>580</y>
+      <y>610</y>
       <width>31</width>
       <height>23</height>
      </rect>
@@ -86,9 +86,9 @@
     <property name="geometry">
      <rect>
       <x>450</x>
-      <y>230</y>
+      <y>240</y>
       <width>371</width>
-      <height>291</height>
+      <height>311</height>
      </rect>
     </property>
     <property name="title">
@@ -97,7 +97,7 @@
     <widget class="QLabel" name="idCustomLabel">
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>10</x>
        <y>30</y>
        <width>16</width>
        <height>16</height>
@@ -110,7 +110,7 @@
     <widget class="QLabel" name="categoryCustomLabel">
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>10</x>
        <y>110</y>
        <width>57</width>
        <height>16</height>
@@ -123,7 +123,7 @@
     <widget class="QLabel" name="answerCustomLabel">
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>10</x>
        <y>190</y>
        <width>122</width>
        <height>16</height>
@@ -136,7 +136,7 @@
     <widget class="QLabel" name="scoreCustomLabel">
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>10</x>
        <y>220</y>
        <width>36</width>
        <height>16</height>
@@ -204,30 +204,14 @@
       </size>
      </property>
     </widget>
-    <zorder>answerCustomLabel</zorder>
-    <zorder>answerCustomLineEdit</zorder>
-    <zorder>idCustomPlainTextEdit</zorder>
-    <zorder>idCustomLabel</zorder>
-    <zorder>scoreCustomLabel</zorder>
-    <zorder>categoryCustomPlainTextEdit</zorder>
-    <zorder>scoreCustomPlainTextEdit</zorder>
-    <zorder>categoryCustomLabel</zorder>
-    <zorder>idCustomLabel</zorder>
-    <zorder>categoryCustomLabel</zorder>
-    <zorder>answerCustomLabel</zorder>
-    <zorder>scoreCustomLabel</zorder>
-    <zorder>idCustomPlainTextEdit</zorder>
-    <zorder>categoryCustomPlainTextEdit</zorder>
-    <zorder>answerCustomLineEdit</zorder>
-    <zorder>scoreCustomPlainTextEdit</zorder>
    </widget>
    <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>230</y>
+      <y>240</y>
       <width>421</width>
-      <height>291</height>
+      <height>311</height>
      </rect>
     </property>
     <property name="title">
@@ -236,7 +220,7 @@
     <widget class="QLabel" name="idColumnLabel">
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>10</x>
        <y>30</y>
        <width>102</width>
        <height>16</height>
@@ -249,7 +233,7 @@
     <widget class="QLabel" name="responseColumnLabel">
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>10</x>
        <y>60</y>
        <width>152</width>
        <height>16</height>
@@ -262,7 +246,7 @@
     <widget class="QLabel" name="categoryColumnLabel">
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>10</x>
        <y>90</y>
        <width>146</width>
        <height>16</height>
@@ -275,7 +259,7 @@
     <widget class="QLabel" name="answerOptionColumnLabel">
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>10</x>
        <y>120</y>
        <width>187</width>
        <height>16</height>
@@ -288,7 +272,7 @@
     <widget class="QLabel" name="answerScoreColumnLabel">
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>10</x>
        <y>150</y>
        <width>175</width>
        <height>16</height>
@@ -355,7 +339,7 @@
       <x>20</x>
       <y>110</y>
       <width>421</width>
-      <height>101</height>
+      <height>121</height>
      </rect>
     </property>
     <property name="title">
@@ -364,7 +348,7 @@
     <widget class="QLabel" name="inputFolderLabel">
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>10</x>
        <y>30</y>
        <width>73</width>
        <height>16</height>
@@ -406,7 +390,7 @@
     <widget class="QLabel" name="outputFolderLabel">
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>10</x>
        <y>60</y>
        <width>86</width>
        <height>16</height>
@@ -455,7 +439,7 @@
       <x>450</x>
       <y>110</y>
       <width>371</width>
-      <height>101</height>
+      <height>121</height>
      </rect>
     </property>
     <property name="title">
@@ -464,8 +448,8 @@
     <widget class="QCheckBox" name="caseInsensitiveCheckBox">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>20</y>
+       <x>10</x>
+       <y>30</y>
        <width>198</width>
        <height>20</height>
       </rect>
@@ -477,8 +461,8 @@
     <widget class="QCheckBox" name="customColumnCheckBox">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>50</y>
+       <x>10</x>
+       <y>60</y>
        <width>168</width>
        <height>20</height>
       </rect>
@@ -490,8 +474,8 @@
     <widget class="QCheckBox" name="customExperimentCheckBox">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>80</y>
+       <x>10</x>
+       <y>90</y>
        <width>145</width>
        <height>20</height>
       </rect>
@@ -500,10 +484,6 @@
       <string>Custom Experiment</string>
      </property>
     </widget>
-    <zorder>caseInsensitiveCheckBox</zorder>
-    <zorder>customColumnCheckBox</zorder>
-    <zorder>groupBox_2</zorder>
-    <zorder>customExperimentCheckBox</zorder>
    </widget>
    <widget class="QTextEdit" name="statusBox">
     <property name="enabled">
@@ -512,7 +492,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>630</y>
+      <y>650</y>
       <width>801</width>
       <height>221</height>
      </rect>
@@ -547,7 +527,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>540</y>
+      <y>570</y>
       <width>801</width>
       <height>22</height>
      </rect>
