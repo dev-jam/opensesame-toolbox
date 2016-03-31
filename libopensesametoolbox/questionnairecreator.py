@@ -17,9 +17,6 @@ Refer to <http://www.gnu.org/licenses/> for a copy of the GNU General Public Lic
 @author Bob Rosbag
 """
 
-import tarfile
-import io
-
 from libopensesametoolbox.clean_data import usanitize
 
 
@@ -29,8 +26,6 @@ def QuestionnaireCreator(infile, fileName, nameString, resolutionHorizontal, res
     """
     Create questionnaire
     """
-
-    scriptName = 'script.opensesame'
 
     nrcycles = str(len(questionList))
 
@@ -129,16 +124,7 @@ def QuestionnaireCreator(infile, fileName, nameString, resolutionHorizontal, res
     ## convert all unicode characters not present in ascii to unicode string
     cleanData = usanitize(data)
 
-    ## encode the unicode data with only ascii to ascii byte data
-    byteData = cleanData.encode('ascii')
-
-    ## write the ascii byte data to byte string object
-    tardata =   io.BytesIO(byteData)
-
-    tarinfo = tarfile.TarInfo(scriptName)
-    tarinfo.size = len(byteData)
-
-    with tarfile.open(fileName, "w|gz") as archive:
-        archive.addfile(tarinfo, tardata)
+    with open(fileName, 'w') as out:
+        out.write(cleanData)
 
     return True

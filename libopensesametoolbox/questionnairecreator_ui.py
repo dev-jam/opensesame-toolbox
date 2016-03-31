@@ -320,7 +320,7 @@ class QuestionnaireCreatorUI(QtWidgets.QDialog):
         self.languageString = languageString
 
         ## create file name
-        self.baseName = nameString + '.opensesame.tar.gz'
+        self.baseName = nameString + '.osexp'
         folderName    = os.path.join(self.sourceFolder, self.languageString)
         fileNamePath  = os.path.join(folderName, self.baseName)
 

@@ -36,7 +36,7 @@ from libopensesametoolbox.io_tools import OutLog, getResourceLoc, findOpensesame
 from libopensesametoolbox.clean_data import stringToBool
 
 
-version = "2.1"
+version = "2.2"
 author = "Bob Rosbag"
 email = "debian@bobrosbag.nl"
 
@@ -168,6 +168,7 @@ class ExperimentManagerUI(QtWidgets.QMainWindow):
         # default widget values
         self.defaultResolutionHorizontalInteger = int(self.conf_experimentmanager_ui['defaultResolutionHorizontalInteger'])
         self.defaultResolutionVerticalInteger   = int(self.conf_experimentmanager_ui['defaultResolutionVerticalInteger'])
+        self.extensionList                      = list(self.conf_experimentmanager_ui['extensionList'])
 
 
     def _initUI(self):
@@ -367,9 +368,7 @@ class ExperimentManagerUI(QtWidgets.QMainWindow):
             logFileExists = None
             logDestinationFilePathList = []
             for experiment in selectedExperimentList:
-                strippedExperiment = experiment.replace('.opensesame.tar.gz','')
-                strippedExperiment = strippedExperiment.replace('.opensesame','')
-
+                strippedExperiment = experiment
                 logDestinationFolder = os.path.join(self.destinationFolder, selectedLanguage, strippedExperiment)
                 logDestinationFile = 'subject-' + selectedSubjectNr + '.csv'
                 logDestinationFilePath = os.path.join(logDestinationFolder, logDestinationFile)
@@ -720,8 +719,6 @@ class ExperimentManagerUI(QtWidgets.QMainWindow):
         """
         langList = list(self.langList)
 
-        extensionList = ['.opensesame.tar.gz', '.opensesame']
-
         for item in sorted(os.listdir(self.sourceFolder)):
             languageDir = os.path.join(self.sourceFolder, item)
             if os.path.isfile(languageDir):
@@ -734,7 +731,7 @@ class ExperimentManagerUI(QtWidgets.QMainWindow):
                     pass
 
                 expFileList = []
-                for extension in extensionList:
+                for extension in self.extensionList:
                     expFileList.extend(glob.glob(languageDir + self.fs + '*' + extension))
 
                 expFileList = sorted(expFileList)
