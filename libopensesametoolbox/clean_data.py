@@ -27,34 +27,37 @@ def cleanUpString(string, delimiter):
     """
     stringList = string.split(delimiter)
     stringList = removeJunk(stringList)
-    string = ';'.join(stringList)
-    return string
+    __string = ';'.join(stringList)
+    return __string
 
 def cleanUpStringList(stringList, delimiter):
     """
     Remove spaces and tabs from strings in a list around the delimiter
     """
-    for index in range(len(stringList)):
-        stringList[index] = cleanUpString(stringList[index],delimiter)
+    __stringList = list(stringList)
+    for index in range(len(__stringList)):
+        __stringList[index] = cleanUpString(__stringList[index],delimiter)
 
-    stringList = stringList[:-1] if stringList[-1] == '' else stringList
-    return stringList
+    __stringList = __stringList[:-1] if __stringList[-1] == '' else __stringList
+    return __stringList
 
 def removeJunk(stringList):
     """
     Remove trailing white space from the values in a list
     """
-    stringList = list(map(lambda it: it.strip(), stringList))
-    stringList = stringList[:-1] if stringList[-1] == '' else stringList
-    return stringList
+    __stringList = list(stringList)   
+    __stringList = list(map(lambda it: it.strip(), __stringList))
+    __stringList = __stringList[:-1] if __stringList[-1] == '' else __stringList
+    return __stringList
 
 def lowercaseList(stringList):
     """
     Convert strings in a list to lowercase
     """
-    for index in range(len(stringList)):
-        stringList[index] = stringList[index].lower()
-    return stringList
+    __stringList = list(stringList)
+    for index in range(len(__stringList)):
+        __stringList[index] = __stringList[index].lower()
+    return __stringList
 
 def stringToBool(string):
     if string == 'true' or string == 'True' or string == '1':
@@ -68,9 +71,9 @@ def usanitize(string):
     """
     Convert unicode to ascii plus opensame-style replacement of unicode
     """
-    _s = codecs.encode(string, 'ascii', 'osreplace')
-    _s = codecs.decode(_s, 'ascii')
-    return _s.replace(os.linesep, '\n')
+    __s = codecs.encode(string, 'ascii', 'osreplace')
+    __s = codecs.decode(__s, 'ascii')
+    return __s.replace(os.linesep, '\n')
 
 def osreplace(exc):
 
@@ -88,10 +91,10 @@ def osreplace(exc):
         type:	tuple
     """
 
-    _s = ''
+    __s = ''
     for ch in exc.object[exc.start:exc.end]:
-        _s += 'U+%.4X' % ord(ch)
-    return _s, exc.end
+        __s += 'U+%.4X' % ord(ch)
+    return __s, exc.end
 
 codecs.register_error('osreplace', osreplace)
 
