@@ -29,7 +29,7 @@ It is also possible to use OpenSesame Questionnaire Processor from CLI:
 
     python opensesame-questionnaire-processor <source_folder> [<target_folder>]
 
-In linux where Python 2 is default, <python3> has to be used as cmd instead of <python>
+In linux with Python 2 set to default, "python3" has to be used as cmd instead of "python"
 To use the CLI method it is required the questionnaires originate from the OpenSesame Experiment Manager or contain the same column names in the log files.
 
 
