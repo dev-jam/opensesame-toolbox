@@ -31,4 +31,3 @@ override_dh_auto_install:
 	python3 setup.py install --root=debian/opensesame-toolbox --install-layout=deb --install-lib=/usr/share/opensesame-toolbox --install-scripts=/usr/share/opensesame-toolbox
 override_dh_auto_build:
 
-

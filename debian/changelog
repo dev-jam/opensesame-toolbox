@@ -1,3 +1,12 @@
+opensesame-toolbox (2.2-1) jessie; urgency=medium
+
+  * Accept .osexp files.
+  * Updated questionnaire scripts to new api style.
+  * Enhanced variable handling in data cleaning.
+  * Added succes box at questionnaire processor.
+
+ -- Bob Rosbag <debian@bobrosbag.nl>  Thu, 31 Mar 2016 02:22:56 +0200
+
 opensesame-toolbox (2.1-1) jessie; urgency=medium
 
   * Small GUI improvements.
