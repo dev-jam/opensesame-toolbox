@@ -293,6 +293,10 @@ def QuestionnaireProcessor(dataFolder, destinationFolder, responseKey, idKey, ca
         ui.progressBar.setValue(100)
     sys.stdout.write('\nTotal process done!\n')
 
+    succesMessage = ("Total process done!")
+    if ui is not None:
+        ui.showErrorMessage(succesMessage)
+
     return True
 
 
