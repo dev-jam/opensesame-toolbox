@@ -4,7 +4,7 @@ Copyright Bob Rosbag (2015)
 
 ABOUT
 -----
-Current version: 2.2
+Current version: 2.3
 
 OpenSesame Toolbox offers two applications to supplement OpenSesame.  
   
