@@ -1,6 +1,6 @@
 opensesame-toolbox (2.3-1) jessie; urgency=medium
 
-  * Updated examplew questionnaires to new api style.
+  * Updated example questionnaires to new api style.
 
  -- Bob Rosbag <debian@bobrosbag.nl>  Thu, 31 Mar 2016 10:44:15 +0200
 
