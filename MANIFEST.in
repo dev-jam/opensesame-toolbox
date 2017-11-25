@@ -1,4 +1,4 @@
-recursive-include resources *
+recursive-include opensesametoolbox_resources *
 include data/opensesame-experiment-manager.desktop
 include data/opensesame-questionnaire-processor.desktop
 include data/x-opensesame-experiment-manager.xml
