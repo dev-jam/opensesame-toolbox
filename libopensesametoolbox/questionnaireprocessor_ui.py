@@ -30,9 +30,9 @@ from libopensesametoolbox.questionnaireprocessor import QuestionnaireProcessor
 from libopensesametoolbox.io_tools import OutLog, getResourceLoc
 from libopensesametoolbox.clean_data import cleanUpString, cleanUpStringList, removeJunk, stringToBool
 
-version = "2.3"
+version = "2.5"
 author = "Bob Rosbag"
-email = "debian@bobrosbag.nl"
+email = "b.rosbag@let.ru.nl"
 
 config = ConfigObj(getResourceLoc('opensesame-toolbox.conf'))
 

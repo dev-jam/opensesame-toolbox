@@ -36,9 +36,9 @@ from libopensesametoolbox.io_tools import OutLog, getResourceLoc, findOpensesame
 from libopensesametoolbox.clean_data import stringToBool
 
 
-version = "2.3"
+version = "2.5"
 author = "Bob Rosbag"
-email = "debian@bobrosbag.nl"
+email = "b.rosbag@let.ru.nl"
 
 config = ConfigObj(getResourceLoc('opensesame-toolbox.conf'))
 
@@ -316,17 +316,17 @@ class ExperimentManagerUI(QtWidgets.QMainWindow):
         elif not self.srcCheckBox.isChecked() and not self.opensesamerunCommandAuto and not self.opensesamerunCommandManual:
             error_message = "Please specify the path to the opensesamerun executable."
             print(error_message, file=sys.stderr)
-            self.show_error_message(error_message)
+            self.showErrorMessage(error_message)
             return
         elif self.srcCheckBox.isChecked() and not self.opensesamerunCommandManual:
             error_message = "Please specify the path to the opensesamerun source file."
             print(error_message, file=sys.stderr)
-            self.show_error_message(error_message)
+            self.showErrorMessage(error_message)
             return
         elif self.srcCheckBox.isChecked() and not self.pythonCommandManual:
             error_message = "Please specify the path to the python 2 executable."
             print(error_message, file=sys.stderr)
-            self.show_error_message(error_message)
+            self.showErrorMessage(error_message)
             return
 
         else:

@@ -17,44 +17,31 @@ Refer to <http://www.gnu.org/licenses/> for a copy of the GNU General Public Lic
 @author Bob Rosbag
 """
 
+import site
 import sys
 import os
 
 from PyQt5 import QtCore, QtGui
 
 
-def getResourceLoc(item):
-    """
-    Determines the correct path to the required resource.
-    When the app is packaged with py2exe or py2app, the locations of some images
-    or resources may change. This function should correct for that
+def getResourceLoc(name):
 
+    """
+    A hacky way to get a resource using the functionality from openexp
 
     Arguments:
-        item (string)  - the item to locate
+    name    --    The name of the requested resource. If this is a regular string
+                it is assumed to be encoded as utf-8.
 
     Returns:
-        (string) - the full path to the provided item
-
+    A Unicode string with the full path to the resource.
     """
 
-    # When the app is packaged with py2app/exe or pyinstaller
-    if getattr(sys, 'frozen', None):
-        # If packaged with py2exe (but should also work for py2installer (not tested!) )
-        basedir = os.path.dirname(sys.executable)
-        print(basedir)
-        if sys.platform == "win32":
-            return os.path.join(basedir, "resources", item)
-        elif sys.platform == "darwin":
-            return os.path.join(basedir, "..", "Resources", "resources", item)
-
-#    # For Linux when installed through a repo
-#    elif os.name == 'posix' and os.path.exists('/usr/share/scoreprocessor/resources/'):
-#        return os.path.join('/usr/share/scoreprocessor/resources/', item)
-    # When run from source
-    else:
-        basedir = os.path.dirname(__file__)
-        return os.path.join(basedir,"..","resources",item)
+    for folder in base_folders:
+        path = os.path.join(folder, 'opensesametoolbox_resources',name)
+        if os.path.exists(path):
+            return path
+    return None
 
 def findOpensesamerun():
 
@@ -74,6 +61,46 @@ def findOpensesamerun():
         command = ""
 
     return command
+
+
+def home_folder():
+
+    """
+    Determines the home folder.
+
+    Returns:
+    A path to the home folder.
+    """
+
+    import platform
+    if platform.system() == "Windows":
+        home_folder = os.environ["APPDATA"]
+    elif platform.system() == "Darwin":
+        home_folder = os.environ[u"HOME"]
+    elif platform.system() == "Linux":
+        home_folder = os.environ["HOME"]
+    else:
+        home_folder = os.environ["HOME"]
+    return home_folder
+
+
+base_folders = []
+cwd = os.getcwd()
+parent_folder = os.path.dirname(os.path.dirname(__file__))
+base_folders = [cwd, parent_folder]
+if hasattr(site, 'getuserbase'):
+    base_folders.append(os.path.join(site.getuserbase(), 'share'))
+if hasattr(site, 'getusersitepackages'):
+    base_folders.append(os.path.join(site.getusersitepackages(),'share'))
+if hasattr(site, 'getsitepackages'):
+    base_folders += \
+        [os.path.join(folder, 'share') \
+        for folder in site.getsitepackages()]
+base_folders += ['/usr/local/share', '/usr/share']
+# Locate Anaconda/Miniconda share
+base_folders.append(os.path.join(os.path.dirname(os.path.dirname(sys.executable)),"share"))
+base_folders = list(filter(os.path.exists, base_folders))
+
 
 
 class OutLog(object):
