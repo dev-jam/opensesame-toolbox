@@ -63,7 +63,7 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>110</width>
+       <width>151</width>
        <height>16</height>
       </rect>
      </property>
@@ -85,7 +85,7 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>10</x>
        <y>60</y>
-       <width>62</width>
+       <width>91</width>
        <height>16</height>
       </rect>
      </property>
@@ -222,7 +222,7 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>10</x>
        <y>90</y>
-       <width>158</width>
+       <width>141</width>
        <height>16</height>
       </rect>
      </property>
@@ -236,7 +236,7 @@ p, li { white-space: pre-wrap; }
       <string>Insert the subject number</string>
      </property>
      <property name="text">
-      <string>Subject number (integer)</string>
+      <string>Subject number</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="subjectLineEdit">
@@ -253,6 +253,19 @@ p, li { white-space: pre-wrap; }
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>90</y>
+       <width>121</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>* integer</string>
      </property>
     </widget>
    </widget>
@@ -273,7 +286,7 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>113</width>
+       <width>161</width>
        <height>20</height>
       </rect>
      </property>
@@ -292,7 +305,7 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>10</x>
        <y>60</y>
-       <width>138</width>
+       <width>181</width>
        <height>20</height>
       </rect>
      </property>
@@ -309,9 +322,9 @@ p, li { white-space: pre-wrap; }
     <widget class="QLabel" name="resolutionHorizontalLabel">
      <property name="geometry">
       <rect>
-       <x>210</x>
+       <x>200</x>
        <y>34</y>
-       <width>129</width>
+       <width>151</width>
        <height>16</height>
       </rect>
      </property>
@@ -328,9 +341,9 @@ p, li { white-space: pre-wrap; }
     <widget class="QLabel" name="resolutionVerticalLabel">
      <property name="geometry">
       <rect>
-       <x>210</x>
+       <x>200</x>
        <y>63</y>
-       <width>114</width>
+       <width>151</width>
        <height>16</height>
       </rect>
      </property>
@@ -394,7 +407,7 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>219</width>
+       <width>271</width>
        <height>20</height>
       </rect>
      </property>
@@ -419,7 +432,7 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>10</x>
        <y>60</y>
-       <width>125</width>
+       <width>151</width>
        <height>16</height>
       </rect>
      </property>
@@ -441,7 +454,7 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>10</x>
        <y>90</y>
-       <width>65</width>
+       <width>101</width>
        <height>16</height>
       </rect>
      </property>
@@ -569,7 +582,7 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>10</x>
        <y>120</y>
-       <width>407</width>
+       <width>501</width>
        <height>16</height>
       </rect>
      </property>
@@ -601,7 +614,7 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>123</width>
+       <width>171</width>
        <height>16</height>
       </rect>
      </property>
@@ -745,7 +758,7 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>180</x>
        <y>90</y>
-       <width>85</width>
+       <width>111</width>
        <height>16</height>
       </rect>
      </property>
@@ -795,7 +808,7 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>180</x>
        <y>120</y>
-       <width>85</width>
+       <width>111</width>
        <height>16</height>
       </rect>
      </property>
@@ -814,7 +827,7 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>180</x>
        <y>60</y>
-       <width>171</width>
+       <width>211</width>
        <height>16</height>
       </rect>
      </property>
@@ -932,7 +945,7 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>180</x>
        <y>30</y>
-       <width>156</width>
+       <width>201</width>
        <height>16</height>
       </rect>
      </property>

@@ -4,7 +4,7 @@ Copyright Bob Rosbag (2015)
 
 ABOUT
 -----
-Current version: 2.6
+Current version: 2.7
 
 OpenSesame Toolbox offers two applications to supplement OpenSesame.  
   
@@ -29,7 +29,7 @@ It is also possible to use OpenSesame Questionnaire Processor from CLI:
 
     python opensesame-questionnaire-processor <source_folder> [<target_folder>]
 
-In linux with Python 2 set to default, "python3" has to be used as cmd instead of "python".
+In linux where Python 2 is default, <python3> has to be used as cmd instead of <python>
 To use the CLI method it is required the questionnaires originate from the OpenSesame Experiment Manager or contain the same column names in the log files.
 
 

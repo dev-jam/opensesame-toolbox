@@ -1,3 +1,9 @@
+opensesame-toolbox (2.7-1) stretch; urgency=medium
+
+  * Fixed experiment manager ui.
+
+ -- Bob Rosbag <debian@bobrosbag.nl>  Mon, 27 Nov 2017 10:14:15 +0200
+
 opensesame-toolbox (2.6-1) stretch; urgency=medium
 
   * Replaced resource function in io_tools.

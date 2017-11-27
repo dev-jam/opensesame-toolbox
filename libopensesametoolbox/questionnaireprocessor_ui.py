@@ -30,7 +30,7 @@ from libopensesametoolbox.questionnaireprocessor import QuestionnaireProcessor
 from libopensesametoolbox.io_tools import OutLog, getResourceLoc
 from libopensesametoolbox.clean_data import cleanUpString, cleanUpStringList, removeJunk, stringToBool
 
-version = "2.6"
+version = "2.7"
 author = "Bob Rosbag"
 email = "b.rosbag@let.ru.nl"
 
