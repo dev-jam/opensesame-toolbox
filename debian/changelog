@@ -1,3 +1,9 @@
+opensesame-toolbox (2.8-1) bullseye; urgency=medium
+
+  * Update icon
+
+ -- Bob Rosbag <debian@bobrosbag.nl>  Wed, 27 Jul 2022 21:03:40 +0200
+
 opensesame-toolbox (2.7-1) stretch; urgency=medium
 
   * Fixed experiment manager ui.
